@@ -142,7 +142,7 @@ public class RequestService {
     public Page<Request> getRequestsByUserNameAndStatus(String username, Pageable pageable, boolean isDirectionDesc) {
         Sort sortOrder = getSortOrder(isDirectionDesc);
         Pageable sortedPageable = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sortOrder);
-        return requestRepository.findByUserNameContainingAndStatus(username, RequestStatus.SENT, sortedPageable);
+        return requestRepository.findByUser_NameContainingIgnoreCaseAndStatus(username, RequestStatus.SENT, sortedPageable);
     }
 
     private static Sort getSortOrder(Boolean isDirectionDesc) {
